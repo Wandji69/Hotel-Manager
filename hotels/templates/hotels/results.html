@@ -1,0 +1,13 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'hotels/style.css' %}">
+
+<h1>{{ hotel.desc_text }}</h1>
+
+<ul>
+{% for room in hotel.room_set.all %}
+    <li>{{ room.room_text }} -- {{ room.rating }} Rate{{ room.rating|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'hotels:detail' hotel.id %}">Rate again?</a>

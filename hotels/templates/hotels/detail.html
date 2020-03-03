@@ -1,0 +1,16 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'hotels/style.css' %}">
+
+<h1>{{ hotel.desc_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'hotels:rating' hotel.id %}" method="post">
+{% csrf_token %}
+{% for room in hotel.room_set.all %}
+    <input type="radio" name="room" id="room{{ forloop.counter }}" value="{{ room.id }}">
+    <label for="room{{ forloop.counter }}">{{ room.room_text }}</label><br>
+{% endfor %}
+<input type="submit" value="Rate">
+</form>
